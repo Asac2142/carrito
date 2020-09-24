@@ -65,6 +65,7 @@ export class ProductosComponent implements OnInit {
         this.getSubtotal(product)
       );
       this.cartService.addToCart(productAdded);
+      this.cartService.cartEmitter.next(this.cartService.getCart());
       this.getNotification();
     }        
   }

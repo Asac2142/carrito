@@ -64,7 +64,8 @@
                     }  
                     
                     .btn-add {
-                        background: #0ec50e;                         
+                        background: #0ec50e;   
+                        border: 1px solid #0ec50e;                      
                     }
 
                     .btn-add:hover,
@@ -73,7 +74,8 @@
                     }
 
                     .btn-substract {
-                        background: #ffa600;                        
+                        background: #ffa600;  
+                        border: 1px solid #ffa600;                      
                     }
 
                     .btn-substract:hover,
@@ -96,32 +98,15 @@
                         background: #1288d6;
                         color: #fff;
                         font-weight: bold;
+                        border: 1px solid #1288d6;
                     }                 
 
                     button:hover,
                     button:active { 
-                        background: #209aeb;                       
+                        background: #209aeb;                        
                     }
                 }                
             }            
         }
-    }
-}
-
-@keyframes jump {
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-0.2rem);
-    }
-
-    75% {
-        transform: translateY(0.2rem);
-    }
-
-    100% {
-        transform: translateY(0);
     }
 }
