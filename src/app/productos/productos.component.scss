@@ -1,0 +1,126 @@
+.container {    
+    padding: 1rem;
+
+    .product-list {
+        list-style: none;
+
+        .product-item {
+            border: 2px solid #1288d6;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            display: flex;            
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.3rem;
+            margin: 0.5rem 0;
+            box-shadow: 1px 1px 1px #0f79c0;
+
+            .product-item_container {
+                text-align: justify;
+
+                .product-title,
+                .product-description,
+                .product-price {
+                    margin-bottom: 0.5rem;
+                }
+
+                .product-title {
+                    font-size: 1.2rem;
+                }
+
+                .product-price {
+                    background: #eb2b2b;
+                    color: #fff;
+                    text-align: center;
+                    width: 4rem;
+                    padding: 0.3rem 0;
+                    font-weight: bold;
+                    border-radius: 0.5rem;
+                }
+            }
+
+            .product-item_order {
+                padding: 1rem;
+                display: flex;
+                align-items: center;
+
+                .product-item_quantity {                                        
+                    display: flex;                    
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-right: 1rem;
+
+                    .btn-add,
+                    .btn-substract {
+                        border-radius: 1rem;
+                        outline: none;
+                        width: 2rem;
+                        height: 2rem;
+                        color: #fff;
+                        font-weight: bold;
+                        font-size: 1rem;   
+                        cursor: pointer;                                                                                             
+                    }  
+                    
+                    .btn-add {
+                        background: #0ec50e;                         
+                    }
+
+                    .btn-add:hover,
+                    .btn-add:active {
+                        background: #0db60d;                        
+                    }
+
+                    .btn-substract {
+                        background: #ffa600;                        
+                    }
+
+                    .btn-substract:hover,
+                    .btn-substract:active {
+                        background: #eca520;
+                    }
+
+                    .quantity {
+                        margin: 0 1.5rem;
+                        font-weight: bold;
+                    }
+                }
+    
+                .product-item_add {   
+                    button {
+                        padding: 1rem;
+                        border-radius: 0.5rem;
+                        outline: none;
+                        cursor: pointer;
+                        background: #1288d6;
+                        color: #fff;
+                        font-weight: bold;
+                    }                 
+
+                    button:hover,
+                    button:active { 
+                        background: #209aeb;                       
+                    }
+                }                
+            }            
+        }
+    }
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-0.2rem);
+    }
+
+    75% {
+        transform: translateY(0.2rem);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

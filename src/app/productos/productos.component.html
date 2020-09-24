@@ -1,1 +1,22 @@
-<p>productos works!</p>
+<div class="container">
+    <ul class="product-list">
+        <li class="product-item" 
+            *ngFor="let product of products">
+            <div class="product-item_container">
+                <h5 class="product-title">{{ product.name }}</h5>
+                <p class="product-description">{{ product.description }}</p>
+                <p class="product-price">${{ product.price }}</p>
+            </div>
+            <div class="product-item_order">
+                <div class="product-item_quantity">
+                    <button class="btn-substract" (click)="substractQuantity(product)">-</button>
+                    <p class="quantity">{{ product.qty }}</p>
+                    <button class="btn-add" (click)="addQuantity(product)">+</button>                    
+                </div>
+                <div class="product-item_add">
+                    <button (click)="onAddingProduct(product)">Add</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
