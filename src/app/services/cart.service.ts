@@ -18,11 +18,10 @@ export class CartService {
 
   public addToCart(cart: Cart): void {
     this.cart.push(cart);
-    console.log(this.cart);
   }
 
   public removeFromCart(id: string): void {
-    const position = this.cart.findIndex(e => e.product.id === id);
+    const position = this.cart.findIndex(e => e.id === id);
     this.cart.splice(position, 1);
   }
 }
