@@ -64,7 +64,7 @@ export class ProductosComponent implements OnInit {
     return `${product.name} ${product.qty} ${product.qty * product.price}`;
   }  
 
-  private getSubtotal(product: Product) {
+  private getSubtotal(product: Product): number {
     return product.qty * product.price;
   }
 }
