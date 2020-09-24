@@ -62,7 +62,8 @@ export class ProductosComponent implements OnInit {
     if (product.qty > 0) {
       const productAdded = new Cart(
         product,
-        this.getSubtotal(product)
+        this.getSubtotal(product),
+        this.getId(product)
       );
       this.cartService.addToCart(productAdded);
       this.cartService.cartEmitter.next(this.cartService.getCart());
@@ -85,5 +86,9 @@ export class ProductosComponent implements OnInit {
 
   private getSubtotal(product: Product): number {
     return product.qty * product.price;
+  }
+
+  private getId(product: Product): string {
+    return `${product.id}_${Math.floor(Math.random() * 5000) + 1}`;
   }
 }
