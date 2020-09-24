@@ -2,9 +2,9 @@
   <div class="nav-bar">
     <div class="logo"></div>    
     <ul class="navigation-list">
-      <li class="navigation-item">Productos</li>
-      <li class="navigation-item">Carrito</li>
-      <li class="navigation-item">Ordenes</li>
+      <li class="navigation-item" routerLink="/">Productos</li>
+      <li class="navigation-item" [routerLink]="['/carrito']">Carrito</li>
+      <li class="navigation-item" [routerLink]="['/ordenes']">Ordenes</li>
     </ul>    
   </div>
 </header>
