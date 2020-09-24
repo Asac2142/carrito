@@ -104,7 +104,7 @@ export class CarritoComponent implements OnInit {
 
   private getOrderDetail(): string {
     let detail: string = '';
-    this.productsOnCart.map(e => detail += `** ${e.product.name} ${e.product.qty} ${e.subtotal}`);    
+    this.productsOnCart.map(e => detail += `**${e.product.name} **${e.product.qty} **${e.subtotal}`);    
     return detail;
   }
 }

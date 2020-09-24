@@ -1,0 +1,122 @@
+.container {    
+    padding: 1rem;
+    max-width: 80rem;
+
+    h1 {
+        text-align: center;
+        background: #ec9109;
+        color: #fff;
+        font-weight: bold;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 3rem;                
+        letter-spacing: 0.2rem;
+    }
+
+    .empty-order {
+        font-weight: bold;
+        text-align: center;        
+    }
+
+    .orders-detail {
+        border: 2px solid black;
+        border-radius: 0.5rem;
+        padding: 1rem;
+
+        .header{            
+            td {
+                font-weight: bold;
+                padding: 0 1rem;
+            }
+        }
+
+        tbody {
+            td {
+                padding: 1rem;
+            }
+
+            .btn-detalle {
+                cursor: pointer;
+                border: 1px solid #ec9109;
+                padding: 0.5rem;
+                border-radius: 0.5rem;
+                color: #fff;
+                font-weight: bold;
+                outline: none;
+                background: #ec9109;
+
+                &:hover,
+                &:active {
+                    background: #fff;
+                    color: #ec9109;
+                }
+            }
+        }
+    }
+
+    .modal-container {
+        display: none;
+        height: 100%;
+        width: 100%;
+
+        .backdrop {
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            background: #000;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            opacity: 0.5;
+        }
+
+        .modal {
+            width: 50%;
+            background: #fff;
+            position: fixed;
+            top: 20%;
+            left: 25%;
+            z-index: 20;
+            padding: 2rem;
+            border-radius: 0.5rem;
+
+            .detail-list {
+                display: flex;
+                justify-content: space-evenly;
+                list-style: none;
+
+                .producto,
+                .precio {
+                    font-weight: bold;
+                }
+            }
+
+            .btn-container {
+                margin-top: 1.5rem;   
+
+                .btn-cerrar {
+                    cursor: pointer;
+                    float: right;
+                    border: 1px solid red;
+                    padding: 0.5rem;
+                    border-radius: 0.5rem;
+                    color: #fff;
+                    font-weight: bold;
+                    outline: none;
+                    background: red;
+
+                    &:hover,
+                    &:active {
+                        background: #e93f3f;
+                    }
+                }
+            }
+
+            .cuerpo {
+                td {
+                    padding: 1rem;
+                }
+            }
+        }
+    }
+}

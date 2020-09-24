@@ -1,1 +1,51 @@
-<p>ordenes works!</p>
+<div class="container">
+    <h1>Historial de ordenes</h1>
+    <p class="empty-order"
+       *ngIf="orderList.length <= 0; else order">No existen ordenes por el momento</p>
+    <ng-template #order>
+        <div class="modal-container" #modal>
+            <div class="backdrop"></div>
+            <div class="modal">
+                <table>
+                    <tbody class="cuerpo">
+                        <tr *ngFor="let dHistory of detailHistory">
+                            <td>{{ dHistory.product }}</td>
+                            <td>{{ dHistory.cantidad }}</td>
+                            <td>${{ dHistory.precio }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                
+                <!-- <ul class="detail-list" *ngFor="let dHistory of detailHistory">
+                    <li class="producto">{{ dHistory.product }}</li>
+                    <li class="cantidad">{{ dHistory.cantidad }}</li>
+                    <li class="precio">${{ dHistory.precio }}</li>
+                </ul> -->
+                <div class="btn-container">
+                    <button class="btn-cerrar" (click)="onCloseModal()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+        <div class="orders-detail">
+            <table>
+                <thead class="header">
+                    <td class="usuario">ID Usuario</td>
+                    <td class="detalle">Detalle Pedido</td>
+                    <td class="subtotal">Subtotal</td>
+                    <td class="total">Total</td>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let orderItem of orderList">
+                        <td>{{ orderItem.userId }}</td>
+                        <td>
+                            <button class="btn-detalle" (click)="onShowModal()">Ver detalle</button>
+                        </td>
+                        <td>{{ orderItem.subtotal }}</td>
+                        <td>{{ orderItem.total }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </ng-template>
+</div>
