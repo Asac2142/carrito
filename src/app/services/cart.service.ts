@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+
 import { Cart } from '../model/cart.model';
 
 @Injectable({
@@ -6,6 +8,7 @@ import { Cart } from '../model/cart.model';
 })
 export class CartService {
   private cart: Cart[] = [];
+  public cartEmitter: Subject<Cart[]> = new Subject<Cart[]>();
 
   constructor() { }
 
@@ -18,7 +21,8 @@ export class CartService {
     console.log(this.cart);
   }
 
-  public removeFromCart(id: number): void {
-    this.cart.splice(id, 1);
+  public removeFromCart(id: string): void {
+    const position = this.cart.findIndex(e => e.product.id === id);
+    this.cart.splice(position, 1);
   }
 }
