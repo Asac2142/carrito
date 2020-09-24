@@ -5,6 +5,9 @@ import { Cart } from '../model/cart.model';
 import { Order } from '../model/order.model';
 import { CartService } from '../services/cart.service';
 import { OrderService } from '../services/order.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-carrito',
@@ -13,17 +16,32 @@ import { OrderService } from '../services/order.service';
 })
 export class CarritoComponent implements OnInit {
   public productsOnCart: Cart[] = [];
-  private randomNumber: number;
   private subtotal = 0;
   private total = 0;
   private IVA = 0.12;
+  form: FormGroup;
 
-  constructor(private cartService: CartService, private orderService: OrderService) { }
+  constructor(
+    private cartService: CartService, 
+    private orderService: OrderService,
+    private _notification: NotificationsService,
+    private _fb: FormBuilder,) { }
 
   ngOnInit(): void {  
     this.productsOnCart = this.cartService.getCart();
     this.calcSubtotal();
     this.calcTotal();
+
+    this.form = this._fb.group({      
+			type: 'success',
+			title: 'Compra realizada con exito',
+			content: 'Listo!, tu compra fue hecha',
+			timeOut: 5000,
+			showProgressBar: true,
+			pauseOnHover: true,
+			clickToClose: true,
+      animate: 'fromRight'      
+		});
   }
 
   public removeProduct(product: Product): void {
@@ -42,14 +60,32 @@ export class CarritoComponent implements OnInit {
 
   public onPurchase(): void {
     const order = new Order(
-      this.getOrderId(),
+      uuid.v4(),
       this.getUserId(),
       this.getOrderDetail(),
       this.getSubtotal(),
       this.getTotal()
     );
     this.orderService.addOrder(order);
-    this.orderService.storeOrder(order);
+    this.orderService.storeOrder(order).subscribe(response => {      
+      if (response.message.toLowerCase().trim() === 'ok') {        
+        this.cartService.resetCart();
+        this.getNotification();
+      }
+    });
+  }
+
+  private getNotification(): void {
+    const temp = this.form.getRawValue();
+		const title = temp.title;
+		const content = temp.content;
+		const type = temp.type;
+
+		delete temp.title;
+		delete temp.content;
+		delete temp.type;
+
+		this._notification.create(title, content, type, temp)
   }
 
   private calcSubtotal(): void {
@@ -62,13 +98,8 @@ export class CarritoComponent implements OnInit {
     this.total = this.subtotal + (this.subtotal * this.IVA);
   }
 
-  private getOrderId(): number {
-    this.randomNumber = Math.floor(Math.random() * 5000) + 1;
-    return this.randomNumber;
-  }
-
   private getUserId(): string {
-    return `user_${this.randomNumber}`;
+    return `user_${Math.floor(Math.random() * 5000) + 1}`;
   }
 
   private getOrderDetail(): string {
