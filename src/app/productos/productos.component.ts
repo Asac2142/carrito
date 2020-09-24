@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { NotificationsService } from 'angular2-notifications';
 import { Product } from '../interface/product.interface';
-import { Order } from '../model/order.model';
-import { OrderService } from '../services/order.service';
 import { ProductsService } from '../services/products.service';
+import { Cart } from '../model/cart.model';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-productos',
@@ -11,10 +13,14 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['./productos.component.scss']
 })
 export class ProductosComponent implements OnInit {
-  public products: Product[];
-  private randomNumber: number;
+  public products: Product[];  
+  form: FormGroup;
 
-  constructor(private productService: ProductsService, private orderService: OrderService) { }
+  constructor(
+    private _notification: NotificationsService,
+    private _fb: FormBuilder,
+    private productService: ProductsService, 
+    private cartService: CartService) { }
 
   ngOnInit(): void {
     this.products = [];    
@@ -29,6 +35,17 @@ export class ProductosComponent implements OnInit {
         })
       });
     });
+
+    this.form = this._fb.group({      
+			type: 'success',
+			title: 'Producto agregado',
+			content: 'Tu producto se agreago al carrito',
+			timeOut: 5000,
+			showProgressBar: true,
+			pauseOnHover: true,
+			clickToClose: true,
+      animate: 'fromRight'      
+		});
   }
 
   public addQuantity(product: Product): void {
@@ -42,27 +59,28 @@ export class ProductosComponent implements OnInit {
   }
 
   public onAddingOrder(product: Product): void {
-    const orderAdded = new Order(
-      this.getOrderId(), 
-      this.getUserId(), 
-      this.getDetail(product), 
-      this.getSubtotal(product));
-
-    this.orderService.addToOrderList(orderAdded);
+    if (product.qty > 0) {
+      const productAdded = new Cart(
+        product,
+        this.getSubtotal(product)
+      );
+      this.cartService.addToCart(productAdded);
+      this.getNotification();
+    }        
   }
 
-  private getUserId(): string {
-    this.randomNumber = Math.floor(Math.random() * 5000) + 1;
-    return `user_${this.randomNumber}`;
-  }
+  private getNotification(): void {
+    const temp = this.form.getRawValue();
+		const title = temp.title;
+		const content = temp.content;
+		const type = temp.type;
 
-  private getOrderId(): number {
-    return this.randomNumber;
-  }
+		delete temp.title;
+		delete temp.content;
+		delete temp.type;
 
-  private getDetail(product: Product): string {
-    return `${product.name} ${product.qty} ${product.qty * product.price}`;
-  }  
+		this._notification.create(title, content, type, temp)
+  }
 
   private getSubtotal(product: Product): number {
     return product.qty * product.price;
