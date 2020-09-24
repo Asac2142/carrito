@@ -24,4 +24,8 @@ export class CartService {
     const position = this.cart.findIndex(e => e.id === id);
     this.cart.splice(position, 1);
   }
+
+  public resetCart(): void {
+    this.cart.splice(0);
+  }
 }

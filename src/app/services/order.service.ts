@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Order } from '../model/order.model';
 
@@ -16,7 +17,11 @@ export class OrderService {
     this.order.push(order);
   }
 
-  public storeOrder(order: Order): void {
+  public getOrder(): Order[] {
+    return this.order;
+  }
+
+  public storeOrder(order: Order): Observable<any> {
     const freshOrder = {      
       userId: order.userId,
       details: order.detail,
@@ -24,7 +29,6 @@ export class OrderService {
       total: order.total
     }    
     
-    this.http.post(`${this.URL}${order.orderId}`, JSON.stringify(freshOrder))
-      .subscribe(data => console.log(data));
+    return this.http.post(`${this.URL}${order.orderId}`, JSON.stringify(freshOrder));      
   }  
 }
