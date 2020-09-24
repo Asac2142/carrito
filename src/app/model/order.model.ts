@@ -1,8 +1,9 @@
 export class Order {
     constructor(
-        private orderId: number,
-        private userId: string,
-        private detail: string,
-        private subTotal: number
+        public orderId: number,
+        public userId: string,
+        public detail: string,
+        public subtotal: number,
+        public total: number
     ) {}
 }
