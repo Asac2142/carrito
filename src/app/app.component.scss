@@ -16,5 +16,16 @@
 
     footer {
         grid-area: footer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #2e2c2c;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    footer:hover,
+    footer:active {
+        cursor: pointer;
     }
 }
