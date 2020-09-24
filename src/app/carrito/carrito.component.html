@@ -1,1 +1,57 @@
-<p>carrito works!</p>
+<div class="container">
+    <div class="empty-cart"
+         *ngIf="productsOnCart.length <= 0; else cart">
+        <h3>No tienes productos en tu carrito!</h3>
+    </div>
+    <ng-template #cart>
+        <div class="container-cart">
+            <section class="container-cart_header">
+                <div class="cart-header">Tienes {{ productsOnCart.length }} producto(s) en tu carrito!</div>
+                <div class="cart-logo"></div>
+            </section>
+            <div class="cart-detail">
+                <table>
+                    <thead class="header">
+                        <td class="">Producto</td>
+                        <td class="">Cantidad</td>
+                        <td class="">Total</td>
+                    </thead>
+                    <tbody>
+                        <tr class="cart-item"
+                            *ngFor="let p of productsOnCart">
+                            <td>
+                                <h4 class="title">{{ p.product.name }}</h4>
+                            </td>
+                            <td>
+                                <p class="quantity">{{ p.product.qty }}</p>
+                            </td>
+                            <td>
+                                <p class="total">${{ p.subtotal }}</p>
+                            </td>
+                            <td>
+                                <button class="remove" (click)="removeProduct(p)">Remover</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <hr>
+                    <tfoot class="cart-footer">
+                        <tr>
+                            <td></td>
+                            <td class="subtotal">Subtotal:</td>
+                            <td>$ {{ getSubtotal() }} </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="total">Total + 12% IVA:</td>
+                            <td>$ {{ getTotal() }} </td>
+                        </tr>
+                    </tfoot>                    
+                </table>                
+            </div>            
+            <section class="container-cart_footer">                
+                <button class="btn-purchase" (click)="onPurchase()">Ordenar</button>
+            </section>
+        </div>
+    </ng-template>
+
+</div>
